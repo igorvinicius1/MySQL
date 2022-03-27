@@ -1,0 +1,123 @@
+Nome: Igor Vinícius Santos Vieira        RA: 141004        (Exer S11)
+
+1) 
+SELECT t1.nome, t3.nome
+FROM Medico t1, MedicoEspecialidade t2, Especialidade t3
+WHERE t1.cod = t2.medico_cod AND t2.especialidade_cod = t3.cod AND t1.nome = 'Paulo';
+
+2) 
+SELECT t1.nome, t2.data, t2.hora
+FROM Medico t1, Consulta t2
+WHERE t1.cod = t2.medico_cod AND t1.nome = 'Arthur';
+
+3) e 4)
+SELECT t1.nome, t2.nome, t4.nome, t4.endereco
+FROM Medico t1, Especialidade t2, MedicoEspecialidade t3, Clinica t4
+WHERE t2.nome = 'CLiNiCO GERAL' AND t3.medico_cod = t1.cod AND t3.especialidade_cod = t2.cod;
+
+5) 
+SELECT t1.nome, t1.endereco, t2.data
+FROM Clinica t1, Consulta t2
+WHERE t2.data = '2010/03/30' AND t1.cod = t2.clinica_cod;
+
+6)
+SELECT t1.nome, t2.nome
+FROM Medico t1, Clinica t2, MedicoClinica t3
+WHERE t3.clinica_cod = t2.cod AND t1.cod = t3.medico_cod AND t2.nome = 'Clínica Bem Estar';
+
+
+7)
+SELECT t1.nome, t2.nome, t2.endereco
+FROM Medico t1, Clinica t2, MedicoClinica t3
+WHERE t3.clinica_cod = t2.cod AND t1.cod = t3.medico_cod AND t3.medico_cod = '1';
+
+
+8)
+INSERT INTO Clinica VALUES(11, 'centro caçapavense', 'caçapava' );
+INSERT INTO Clinica VALUES(12, 'Tarciso do amaral', 'illinois' );
+
+
+9)
+iNSERT INTO Medico VALUES  (11, 'Vinissola', '9998-9994');
+iNSERT INTO Medico VALUES (12, 'Gustavola', '1070-1090');
+
+10)
+SELECT t1.nome, t2.nome
+FROM Clinica t1
+LEFT JOIN Especialidade t2
+ON t1.cod = t2.cod;
+
+
+11)
+SELECT t1.nome, t2.nome
+FROM Clinica t1
+LEFT JOIN Especialidade t2
+ON t1.cod = t2.cod
+ORDER BY t1.nome;
+
+
+12)
+SELECT t1.nome, t2.hora, t2.data
+FROM Medico t1
+LEFT JOIN Consulta t2
+ON t1.cod = t2.medico_cod;
+
+13)
+SELECT t1.nome, t2.data
+FROM Medico t1
+LEFT JOIN Consulta t2
+ON t1.cod = t2.medico_cod;
+
+
+14)
+SELECT t1.nome, t2.data
+FROM Medico t1
+LEFT JOIN Consulta t2
+ON t1.cod = t2.medico_cod;
+
+15)
+SELECT t1.nome, t2.nome
+FROM Medico t1
+LEFT JOIN Clinica t2
+ON t1.cod = t2.cod
+ORDER BY t2.nome;
+
+
+16)
+SELECT nome
+FROM Clinica, EspecialidadeClinica
+WHERE clinica_cod IN(
+SELECT clinica_cod
+FROM EspecialidadeClinica
+);
+
+
+
+17)
+SELECT nome
+FROM Medico
+WHERE cod IN (11,12);
+
+
+
+18)
+SELECT nome
+FROM Medico
+WHERE cod IN(
+SELECT clinica_cod
+FROM MedicoClinica
+WHERE clinica_cod = '7'
+);
+
+
+19)
+
+
+20)
+CREATE TABLE Folha_Pagto ( medico_cod int, consulta_cod int, valor float,
+primary key(medico_cod, consulta_cod),
+foreign key (medico_cod) references Medico(cod),
+foreign key (consulta_cod) references Consulta(cod) );
+INSERT INTO Folha_Pagto VALUES (1,1,100), (1,2,150),(2,3,100), (2, 4, 150), (3,5,50);
+
+
